@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+  CampusMarket | index.html
+  WEEK 1: static home page. HTML and CSS only, no JavaScript.
+
+  "Static" means this file is sent to every visitor exactly as it is
+  written here. It only changes when a developer edits it.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Makes the page scale properly on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusMarket | Second-hand essentials from students on your campus</title>
+  <meta name="description" content="Buy textbooks, electronics, stationery and room essentials from students on your campus.">
+
+  <!-- Fonts from Google Fonts. If you are offline, the fallback fonts in style.css are used. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Semantic HTML: <header>, <nav>, <main>, <section>, <footer> tell the browser
+       (and screen readers) what each part of the page IS, not just how it looks. -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">CampusMarket</a>
+      <nav class="main-nav" aria-label="Main">
+        <ul>
+          <!-- aria-current="page" marks the link for the page you are on.
+               Copy this header to every page and move it to the matching link. -->
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="catalog.html">Catalog</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Second-hand essentials, from students on your campus.</h1>
+          <p class="lead">
+            CampusMarket is where you find the textbook someone just finished with,
+            a fan for a hot hostel room, or a calculator for tomorrow's CAT.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="catalog.html">Browse the catalog</a>
+            <a class="btn btn-secondary" href="register.html">Create an account</a>
+          </div>
+        </div>
+
+        <!-- A small "notice board" of items. Static for now: these are typed by hand.
+             From Week 9 this list would come from a database instead. -->
+        <aside class="hero-board" aria-labelledby="board-title">
+          <h2 id="board-title">Fresh on the board</h2>
+          <ul class="board-list">
+            <li>
+              <a class="board-item" href="catalog.html">Calculus: Early Transcendentals</a>
+              <span class="price-tag">KES 1,800</span>
+            </li>
+            <li>
+              <a class="board-item" href="catalog.html">Desk Fan</a>
+              <span class="price-tag">KES 1,200</span>
+            </li>
+            <li>
+              <a class="board-item" href="catalog.html">Gel Pens (box of 12)</a>
+              <span class="price-tag">KES 300</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="categories-title">
+      <div class="container">
+        <h2 id="categories-title">Shop by category</h2>
+
+        <!-- BONUS (not required): these links use ?category=... and catalog.js
+             reads it to pre-select the category filter. Without JavaScript they
+             simply open the full catalog. -->
+        <ul class="category-grid">
+          <li>
+            <a class="category-link" href="catalog.html?category=Textbooks">
+              <span class="category-icon" aria-hidden="true">📘</span>
+              <span class="category-name">Textbooks</span>
+              <span class="category-count">2 items</span>
+            </a>
+          </li>
+          <li>
+            <a class="category-link" href="catalog.html?category=Electronics">
+              <span class="category-icon" aria-hidden="true">🔌</span>
+              <span class="category-name">Electronics</span>
+              <span class="category-count">3 items</span>
+            </a>
+          </li>
+          <li>
+            <a class="category-link" href="catalog.html?category=Stationery">
+              <span class="category-icon" aria-hidden="true">📓</span>
+              <span class="category-name">Stationery</span>
+              <span class="category-count">2 items</span>
+            </a>
+          </li>
+          <li>
+            <a class="category-link" href="catalog.html?category=Room%20Essentials">
+              <span class="category-icon" aria-hidden="true">💡</span>
+              <span class="category-name">Room Essentials</span>
+              <span class="category-count">2 items</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="how-title">
+      <div class="container">
+        <h2 id="how-title">How it works</h2>
+        <!-- <ol> (ordered list) because these steps really do happen in order -->
+        <ol class="steps">
+          <li>
+            <strong>Browse the catalog</strong>
+            Every item shows its price in Kenyan shillings and how many are in stock.
+          </li>
+          <li>
+            <strong>Filter and total your order</strong>
+            Search by name, narrow by category or price, then set quantities to see your total.
+          </li>
+          <li>
+            <strong>Create your account</strong>
+            Register once to buy and sell with other students.
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>CampusMarket is a course project for CCS 2314 Web Based Programming II. All prices are in Kenyan shillings (KES).</p>
+    </div>
+  </footer>
+
+</body>
+  </html>

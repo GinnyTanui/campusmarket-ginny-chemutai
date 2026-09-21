@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+  CampusMarket | register.html
+  WEEK 3: a validated registration form + interactive UI elements.
+
+  Two layers of validation exist:
+    - Client-side (this week, js/register.js): fast feedback, better experience.
+    - Server-side (Week 7 onward, PHP): the REAL safety check, because a visitor
+      can switch JavaScript off or skip this page entirely.
+  Today's checks are about experience, not security.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create your account | CampusMarket</title>
+  <meta name="description" content="Register for CampusMarket to buy and sell with other students.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- defer = run the script after the page has loaded, so every element exists -->
+  <script src="js/register.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">CampusMarket</a>
+      <nav class="main-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="catalog.html">Catalog</a></li>
+          <li><a href="register.html" aria-current="page">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page">
+    <div class="form-page">
+
+      <h1>Create your account</h1>
+      <p class="lead">Register to buy and sell on CampusMarket.</p>
+
+      <!--
+        THE FORM
+        - action="#" is a placeholder. In Week 7 this becomes the PHP file that
+          receives the data (e.g. action="register.php").
+        - We put HTML's built-in rules on the fields (required, type="email",
+          minlength, pattern). Use those FIRST; write JavaScript only for what
+          HTML cannot express.
+        - There is deliberately NO "novalidate" attribute here. register.js adds
+          it with JavaScript (form.noValidate = true) so our own friendly messages
+          replace the browser's default pop-ups. If JavaScript fails to load, the
+          browser's built-in validation still protects the form.
+      -->
+      <form id="register-form" class="register-form" action="#" method="post">
+
+        <!-- The form-level message shown when a submit attempt fails.
+             role="alert" makes screen readers announce it. -->
+        <div id="form-alert" class="form-alert" role="alert" hidden></div>
+
+        <!-- Each field: label + input + an empty error paragraph that JavaScript fills.
+             The error paragraph's id is always the input's id + "-error";
+             register.js relies on that naming pattern. -->
+        <div class="field">
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" name="full_name" autocomplete="name"
+                 required minlength="2" placeholder="e.g. Wanjiru Kamau">
+          <p class="error-message" id="full-name-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" autocomplete="email"
+                 required placeholder="you@example.com">
+          <p class="error-message" id="email-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <!-- pattern = a regular expression the value must match.
+               (?:\+?254|0) means +254, 254 or 0, then 7 or 1, then 8 more digits. -->
+          <input type="tel" id="phone" name="phone" autocomplete="tel"
+                 required pattern="(?:\+?254|0)[17][0-9]{8}"
+                 title="A Kenyan number, like 0712345678 or +254712345678"
+                 placeholder="0712 345 678">
+          <p class="hint">For example 0712 345 678 or +254 712 345 678.</p>
+          <p class="error-message" id="phone-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="role">I want to</label>
+          <select id="role" name="role" required>
+            <option value="">Choose one</option>
+            <option value="buy">Buy items</option>
+            <option value="sell">Sell items</option>
+            <option value="both">Buy and sell</option>
+          </select>
+          <p class="error-message" id="role-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input type="password" id="password" name="password" autocomplete="new-password"
+                   required minlength="8">
+            <!-- type="button" so it never submits the form.
+                 `hidden` until JavaScript loads, because it does nothing without JS. -->
+            <button type="button" class="toggle-password" data-target="password"
+                    aria-pressed="false" hidden>Show</button>
+          </div>
+          <p class="hint">At least 8 characters, with a letter and a number.</p>
+
+          <!-- Live strength meter: JS sets data-level (0 to 4) and the text -->
+          <div class="strength-bar" id="strength-bar" data-level="0"><span></span></div>
+          <p class="strength-text" id="strength-text" aria-live="polite"></p>
+
+          <p class="error-message" id="password-error" aria-live="polite"></p>
+        </div>
+
+        <div class="field">
+          <label for="confirm-password">Confirm password</label>
+          <div class="password-wrap">
+            <input type="password" id="confirm-password" name="confirm_password"
+                   autocomplete="new-password" required>
+            <button type="button" class="toggle-password" data-target="confirm-password"
+                    aria-pressed="false" hidden>Show</button>
+          </div>
+          <p class="error-message" id="confirm-password-error" aria-live="polite"></p>
+        </div>
+
+        <!-- SHOW / HIDE TOGGLE (interactive UI element).
+             Progressive enhancement: without JavaScript there is no button and the
+             panel simply stays visible. With JavaScript, the panel starts hidden and
+             the button opens and closes it. -->
+        <div>
+          <button type="button" id="info-toggle" class="info-toggle"
+                  aria-expanded="false" aria-controls="info-panel" hidden>
+            How we use your details
+          </button>
+          <div id="info-panel" class="info-panel">
+            <!-- Placeholder wording for the course project: adapt it to your real policy -->
+            <p><strong>What we ask for and why.</strong> Your name and phone number let buyers and sellers arrange a handover. Your email is used for your account. Your password is never shown to anyone.</p>
+            <p>We only collect what CampusMarket needs. Under Kenya's Data Protection Act, 2019, you can ask to see or delete your details.</p>
+            <p>Right now this page runs entirely in your browser and nothing is sent anywhere.</p>
+          </div>
+        </div>
+
+        <div class="field field-check">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I agree to how CampusMarket uses my details.</label>
+          <p class="error-message" id="terms-error" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create account</button>
+      </form>
+
+      <!-- Shown by JavaScript after every check passes -->
+      <section id="success-panel" class="success-panel" tabindex="-1" hidden>
+        <h2>Welcome, <span id="success-name"></span>!</h2>
+        <p>Your details passed every check. Nothing was saved yet: real accounts need a server and a database, which arrive from Week 7.</p>
+        <div class="success-actions">
+          <a class="btn btn-primary" href="catalog.html">Browse the catalog</a>
+          <button type="button" id="register-another" class="btn btn-secondary">Register another account</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>CampusMarket is a course project for CCS 2314 Web Based Programming II. All prices are in Kenyan shillings (KES).</p>
+    </div>
+  </footer>
+
+</body>
+              </html>

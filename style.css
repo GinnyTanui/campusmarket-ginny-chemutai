@@ -1,0 +1,838 @@
+/* =========================================================
+   CampusMarket | css/style.css
+   One stylesheet shared by every page.
+
+   Sections
+   1.  Design tokens (colours, fonts) : change the look here
+   2.  Base styles
+   3.  Layout helpers
+   4.  Header and footer
+   5.  Buttons
+   6.  Price tag
+   7.  Home page                       (Week 1)
+   8.  Catalog page                    (Week 1 + Week 2)
+   9.  Register form                   (Week 3)
+   10. Motion and small screens
+   ========================================================= */
+
+
+/* ---------- 1. DESIGN TOKENS ----------
+   CSS variables (custom properties) let us name a value once
+   and reuse it everywhere with var(--name). */
+:root {
+  --paper: #f4f7f2;        /* page background: a cool, slightly green white */
+  --card: #ffffff;         /* cards and panels */
+  --ink: #18231d;          /* main text (a very dark green, not pure black) */
+  --muted: #4c5b52;        /* secondary text */
+  --green: #0b6b4d;        /* main brand colour */
+  --green-dark: #08503a;   /* hover states and dark panels */
+  --tint: #e4efe8;         /* light green for hovers and thumbnails */
+  --sun: #ffc533;          /* price tags: the one bright accent */
+  --red: #b3201f;          /* errors */
+  --line: #d5ded6;         /* borders and dividers */
+  --control-border: #8fa397;
+  --focus: #1a5fd9;        /* keyboard focus ring */
+
+  --font-display: "Bricolage Grotesque", "Public Sans", system-ui, sans-serif;
+  --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+
+/* ---------- 2. BASE STYLES ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;   /* padding and border stay inside the set width */
+}
+
+/* Makes the HTML `hidden` attribute always win.
+   Without this, a rule like `display: grid` would override it
+   and "hidden" elements would stay visible. */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; }
+h2 { font-size: 1.6rem; font-weight: 800; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--green); }
+
+/* Visible keyboard focus on everything you can tab to */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Form controls: one shared look. Written once, used on every page. */
+input:not([type="checkbox"]),
+select {
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1.5px solid var(--control-border);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+}
+
+/* Validation states (Week 3). JavaScript adds or removes these classes.
+   They come AFTER the base rule above so they win when both apply. */
+input.invalid,
+select.invalid {
+  border-color: var(--red);
+  background: #fff7f7;
+}
+
+input.valid,
+select.valid {
+  border-color: var(--green);
+}
+
+
+/* ---------- 3. LAYOUT HELPERS ---------- */
+.container {
+  width: min(1120px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.page {
+  padding: 2.5rem 0 1rem;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+
+/* ---------- 4. HEADER AND FOOTER ---------- */
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+/* A thin band in the colours of the Kenyan flag across the top */
+.site-header::before {
+  content: "";
+  display: block;
+  height: 6px;
+  background: linear-gradient(
+    to right,
+    #000 0 32%, #fff 32% 34%,
+    #bb0000 34% 66%, #fff 66% 68%,
+    #006600 68% 100%
+  );
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 0.8rem 0;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.main-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav a {
+  display: block;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.main-nav a:hover {
+  background: var(--tint);
+}
+
+/* The link for the page you are on */
+.main-nav a[aria-current="page"] {
+  background: var(--green);
+  color: #fff;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+
+/* ---------- 5. BUTTONS ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.65rem 1.3rem;
+  border: 2px solid var(--green);
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green);
+}
+
+.btn-secondary:hover {
+  background: var(--tint);
+}
+
+
+/* ---------- 6. PRICE TAG ----------
+   The one memorable shape in the design: a luggage-style tag.
+   clip-path cuts the pointed left edge; ::before draws the hole. */
+.price-tag {
+  --hole: var(--card);       /* the hole shows whatever colour is behind the tag */
+  position: relative;
+  display: inline-block;
+  padding: 0.25rem 0.8rem 0.25rem 1.7rem;
+  background: var(--sun);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  white-space: nowrap;
+  clip-path: polygon(0.9rem 0, 100% 0, 100% 100%, 0.9rem 100%, 0 50%);
+}
+
+.price-tag::before {
+  content: "";
+  position: absolute;
+  left: 0.95rem;
+  top: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--hole);
+  transform: translateY(-50%);
+}
+
+
+/* ---------- 7. HOME PAGE ---------- */
+.hero {
+  padding: 3.5rem 0 2.5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero-board {
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: var(--green-dark);
+  color: #fff;
+}
+
+.hero-board h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #cfe6da;
+}
+
+.board-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.board-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.28);
+}
+
+.board-list li:last-child {
+  border-bottom: 0;
+}
+
+.board-list a {
+  color: #fff;
+  font-weight: 600;
+}
+
+.board-list .price-tag {
+  --hole: var(--green-dark);
+}
+
+.section {
+  padding: 2rem 0;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.category-link {
+  display: block;
+  height: 100%;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.category-link:hover {
+  border-color: var(--green);
+  background: var(--tint);
+}
+
+.category-icon {
+  display: block;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.category-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.category-count {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* A numbered list, because these really are steps in order */
+.steps {
+  display: grid;
+  gap: 1rem;
+  counter-reset: step;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.steps li {
+  position: relative;
+  padding-left: 3rem;
+  counter-increment: step;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.steps strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+}
+
+
+/* ---------- 8. CATALOG PAGE ---------- */
+.page-head {
+  margin-bottom: 1.5rem;
+}
+
+/* Week 2: filter bar */
+.toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.toolbar label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.toolbar input,
+.toolbar select {
+  width: 100%;
+}
+
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 2rem;
+  align-items: start;
+}
+
+.results-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.results-row h2 {
+  margin: 0;
+}
+
+#results-message {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.1rem;
+}
+
+/* Note: JavaScript hides a card with style.display = "none" and
+   shows it again with style.display = "" (empty string), which hands
+   control back to this stylesheet, so `display: flex` returns. */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.product-thumb {
+  display: grid;
+  place-items: center;
+  height: 110px;
+  background: var(--tint);
+  font-size: 3rem;
+}
+
+.product-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.product-category {
+  margin: 0 0 0.2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.product-name {
+  margin-bottom: 0.4rem;
+}
+
+.product-desc {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.product-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.stock {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Week 2: quantity and line total. margin-top:auto pushes this row
+   to the bottom so every card lines up even if descriptions differ. */
+.qty-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.6rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--line);
+}
+
+.qty-row label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.qty-row .qty-input {
+  width: 4.5rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.line-total {
+  margin: 0 0 0 auto;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.qty-message {
+  margin: 0.4rem 0 0;
+  color: var(--red);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.qty-message:empty {
+  display: none;
+}
+
+.empty-state {
+  padding: 1.5rem;
+  border: 1px dashed var(--control-border);
+  border-radius: 14px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Week 2: order summary */
+.order-summary {
+  position: sticky;
+  top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.summary-lines {
+  margin: 0 0 1rem;
+}
+
+.summary-lines > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.35rem 0;
+}
+
+.summary-lines dt {
+  color: var(--muted);
+}
+
+.summary-lines dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.summary-lines .total {
+  margin-top: 0.4rem;
+  padding-top: 0.7rem;
+  border-top: 2px solid var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.summary-lines .total dt {
+  color: var(--ink);
+}
+
+.summary-note {
+  margin: 0.75rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+
+/* ---------- 9. REGISTER FORM (Week 3) ---------- */
+.form-page {
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.register-form {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+.field input:not([type="checkbox"]),
+.field select {
+  width: 100%;
+}
+
+.hint {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.error-message {
+  margin: 0.3rem 0 0;
+  color: var(--red);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* No error text means no space taken up */
+.error-message:empty {
+  display: none;
+}
+
+/* Password box with the Show/Hide button sitting inside it */
+.password-wrap {
+  position: relative;
+}
+
+.password-wrap input {
+  padding-right: 4.5rem;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--tint);
+  color: var(--green-dark);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.toggle-password:hover {
+  background: #d3e5da;
+}
+
+/* Live password strength meter */
+.strength-bar {
+  height: 6px;
+  margin-top: 0.5rem;
+  border-radius: 999px;
+  background: #e1e8e3;
+  overflow: hidden;
+}
+
+.strength-bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--red);
+  transition: width 0.2s ease;
+}
+
+/* JavaScript sets data-level to 0, 1, 2, 3 or 4 */
+.strength-bar[data-level="1"] span { width: 25%;  background: var(--red); }
+.strength-bar[data-level="2"] span { width: 50%;  background: #d9822b; }
+.strength-bar[data-level="3"] span { width: 75%;  background: #5f9f3d; }
+.strength-bar[data-level="4"] span { width: 100%; background: var(--green); }
+
+.strength-text {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.strength-text:empty {
+  display: none;
+}
+
+/* Show/hide toggle for "how we use your details" */
+.info-toggle {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--green);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.info-panel {
+  margin-top: 0.5rem;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--sun);
+  border-radius: 0 10px 10px 0;
+  background: var(--tint);
+  font-size: 0.95rem;
+}
+
+.info-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.field-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 0.6rem;
+  align-items: start;
+}
+
+.field-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  accent-color: var(--green);
+}
+
+.field-check label {
+  margin: 0;
+  font-weight: 400;
+}
+
+.field-check .error-message {
+  grid-column: 1 / -1;
+}
+
+.field-check input.invalid {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.form-alert {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--red);
+  border-radius: 10px;
+  background: #fff1f0;
+  color: var(--red);
+  font-weight: 600;
+}
+
+.success-panel {
+  padding: 1.75rem;
+  border: 2px solid var(--green);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.success-panel:focus {
+  outline: none;   /* JS moves focus here on success; the box itself is the cue */
+}
+
+.success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+
+/* ---------- 10. MOTION AND SMALL SCREENS ---------- */
+@media (max-width: 900px) {
+  .hero-grid,
+  .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .order-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respect people who ask their device for less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

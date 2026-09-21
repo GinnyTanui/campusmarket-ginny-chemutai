@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<!--
-  CampusMarket | catalog.html
-
-  WEEK 1: the static catalog. Nine product cards written by hand in HTML.
-  WEEK 2: adds a filter bar, quantity boxes, an order summary and js/catalog.js.
-
-  Every Week 2 addition is wrapped between a "WEEK 2 START" comment and a
-  "WEEK 2 END" comment. If you ever need the pure Week 1 (no JavaScript)
-  version, delete everything between those markers, plus the script tag in
-  the head.
--->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,14 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- ===== WEEK 2 START: link the JavaScript file =====
-       Keeping JavaScript in its own .js file (not inside the HTML) is the habit
-       the Week 3 slides ask for.
-       `defer` tells the browser: download the script now, but only run it AFTER
-       the whole page has loaded. That guarantees the elements we select in the
-       script (getElementById etc.) already exist. -->
   <script src="js/catalog.js" defer></script>
-  <!-- ===== WEEK 2 END ===== -->
+
 </head>
 <body>
 
@@ -55,11 +38,7 @@
       </p>
     </div>
 
-    <!-- ===== WEEK 2 START: filter bar =====
-         Why a <div role="search"> and not a <form>?
-         Pressing Enter inside a form submits it and reloads the page (see Week 3:
-         preventDefault). This bar filters instantly and never submits anything,
-         so it does not need to be a form. -->
+  
     <div class="toolbar" role="search" aria-label="Filter products">
       <div>
         <label for="search-input">Search products</label>
@@ -102,17 +81,6 @@
           <!-- ===== WEEK 2 END ===== -->
         </div>
 
-        <!--
-          HOW EACH PRODUCT CARD WORKS
-          - <article> because each card is a self-contained item.
-          - data-* attributes store the product's facts in a form JavaScript can read:
-              data-name      the product name (used by the search box)
-              data-category  used by the category filter
-              data-price     price in KES as a plain number (used for filtering and maths)
-              data-stock     how many are available (used to check quantities)
-            In JavaScript you read them with card.dataset.price, card.dataset.stock, etc.
-            (The visible text like "KES 1,800" is only for humans; JS never reads it.)
-        -->
         <div class="product-grid" id="product-list">
 
           <article class="product-card" data-name="Calculus: Early Transcendentals" data-category="Textbooks" data-price="1800" data-stock="3">
@@ -272,7 +240,7 @@
                 <span class="price-tag">KES 1,200</span>
                 <span class="stock">4 in stock</span>
               </p>
-              <!-- ===== WEEK 2 START ===== -->
+        
               <div class="qty-row">
                 <label for="qty-8">Quantity</label>
                 <input type="number" id="qty-8" class="qty-input" min="0" max="4" step="1" value="0" data-stock="4" inputmode="numeric">
@@ -293,7 +261,7 @@
                 <span class="price-tag">KES 650</span>
                 <span class="stock">7 in stock</span>
               </p>
-              <!-- ===== WEEK 2 START ===== -->
+             
               <div class="qty-row">
                 <label for="qty-9">Quantity</label>
                 <input type="number" id="qty-9" class="qty-input" min="0" max="7" step="1" value="0" data-stock="7" inputmode="numeric">

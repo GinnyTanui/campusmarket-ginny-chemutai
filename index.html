@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-<!--
-  CampusMarket | index.html
-  WEEK 1: static home page. HTML and CSS only, no JavaScript.
 
-  "Static" means this file is sent to every visitor exactly as it is
-  written here. It only changes when a developer edits it.
--->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <!-- Makes the page scale properly on phones -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CampusMarket | Second-hand essentials from students on your campus</title>
   <meta name="description" content="Buy textbooks, electronics, stationery and room essentials from students on your campus.">
 
-  <!-- Fonts from Google Fonts. If you are offline, the fallback fonts in style.css are used. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,15 +15,11 @@
 </head>
 <body>
 
-  <!-- Semantic HTML: <header>, <nav>, <main>, <section>, <footer> tell the browser
-       (and screen readers) what each part of the page IS, not just how it looks. -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">CampusMarket</a>
       <nav class="main-nav" aria-label="Main">
         <ul>
-          <!-- aria-current="page" marks the link for the page you are on.
-               Copy this header to every page and move it to the matching link. -->
           <li><a href="index.html" aria-current="page">Home</a></li>
           <li><a href="catalog.html">Catalog</a></li>
           <li><a href="register.html">Register</a></li>
@@ -81,9 +69,6 @@
       <div class="container">
         <h2 id="categories-title">Shop by category</h2>
 
-        <!-- BONUS (not required): these links use ?category=... and catalog.js
-             reads it to pre-select the category filter. Without JavaScript they
-             simply open the full catalog. -->
         <ul class="category-grid">
           <li>
             <a class="category-link" href="catalog.html?category=Textbooks">

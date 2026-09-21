@@ -1,26 +1,4 @@
-/* =============================================================
-   CampusMarket | js/register.js
-   WEEK 3: events, form validation and interactive interfaces
 
-   What this file does
-   1. Validates the registration form with JavaScript
-        - REQUIRED check : name, email, phone, role, password, terms
-        - FORMAT check   : email shape, Kenyan phone number shape
-        - CUSTOM rules   : password strength rules, passwords must MATCH
-   2. Uses addEventListener for every interaction (never onclick)
-   3. Interactive UI elements:
-        - a Show/Hide toggle for "How we use your details"
-        - Show/Hide buttons for the password boxes
-        - a live password strength meter
-        - fields turn red or green as you type
-
-   REMEMBER: this validation is about a good EXPERIENCE, not security.
-   A visitor can switch JavaScript off, so from Week 7 the server (PHP)
-   must check everything again. Never trust client-side validation alone.
-   ============================================================= */
-
-
-/* ---------- 1. SELECT THE ELEMENTS ---------- */
 const form = document.getElementById("register-form");
 
 const nameInput     = document.getElementById("full-name");
@@ -39,21 +17,11 @@ const registerAnotherBtn = document.getElementById("register-another");
 const strengthBar   = document.getElementById("strength-bar");
 const strengthText  = document.getElementById("strength-text");
 
-// The browser's default validation pop-ups are replaced by our own messages.
-// We switch them off HERE (not in the HTML) so that if this script ever fails
-// to load, the browser's built-in validation still protects the form.
+
 form.noValidate = true;
 
 
-/* =============================================================
-   2. VALIDATION RULES
-   One small function per rule. Each takes the value and returns:
-     ""             when the value is fine
-     "some message" when it is not (the message is shown to the user)
-   Good error messages say what is wrong AND how to fix it.
-   ============================================================= */
 
-// REQUIRED + a minimum length
 function validateName(value) {
   const name = value.trim();
   if (name === "") {
@@ -135,9 +103,7 @@ function validateConfirm(value) {
   return "";
 }
 
-// A list describing every field: which input, and which check to run on it.
-// Keeping this in one list means the same code can loop over all fields
-// (on submit) or handle one field (on blur and input).
+
 const fields = [
   { input: nameInput,     check: function () { return validateName(nameInput.value); } },
   { input: emailInput,    check: function () { return validateEmail(emailInput.value); } },
@@ -154,12 +120,7 @@ const fields = [
 ];
 
 
-/* =============================================================
-   3. SHOWING RESULTS ON THE PAGE
-   ============================================================= */
 
-// Shows (or clears) the error under one field, and colours its border.
-// Each error paragraph has the id "<input id>-error", e.g. "email-error".
 function setFieldState(input, message) {
   const errorElement = document.getElementById(input.id + "-error");
   errorElement.textContent = message;
@@ -183,22 +144,7 @@ function validateField(field) {
 }
 
 
-/* =============================================================
-   4. EVENTS: WHEN SHOULD WE VALIDATE?
-   An event is something that happens in the browser, usually because of
-   the user. addEventListener("eventName", function) runs the function
-   each time that event happens on that element.
 
-   We validate at three moments:
-     "blur"   the moment you click or tab AWAY from a field
-     "input"  (or "change") while you type, but only AFTER you have left
-              the field once. Nobody likes an error shouting before they
-              have finished typing their email.
-     "submit" when you press Create account: check everything
-   ============================================================= */
-
-// Remembers which fields the visitor has already visited.
-// A Set is a list that holds each item at most once.
 const touched = new Set();
 
 for (const field of fields) {
@@ -220,13 +166,9 @@ for (const field of fields) {
   });
 }
 
-// SUBMIT
+
 form.addEventListener("submit", function (event) {
-  // MOST IMPORTANT LINE IN THIS FILE.
-  // By default, submitting a form reloads the whole page, which would wipe
-  // out our error messages a split second after they appear.
-  // preventDefault() says: "I'm handling this myself, don't do your default thing."
-  // (Forgetting this is the #1 bug: messages flash and vanish instantly.)
+  
   event.preventDefault();
 
   let invalidCount = 0;
@@ -263,11 +205,7 @@ form.addEventListener("submit", function (event) {
 });
 
 
-/* =============================================================
-   5. SUCCESS AND RESET
-   No server yet, so "success" just means the checks passed. We do NOT
-   store the password anywhere (never put passwords in localStorage).
-   ============================================================= */
+
 
 function showSuccess() {
   // Use the first word of the full name: "Wanjiru Kamau" becomes "Wanjiru"
@@ -308,13 +246,7 @@ function resetForm() {
 registerAnotherBtn.addEventListener("click", resetForm);
 
 
-/* =============================================================
-   6. INTERACTIVE UI: LIVE PASSWORD STRENGTH
-   Pattern from the slides: select an element, then manipulate it,
-   triggered by an event. Here the event is typing in the password box.
-   ============================================================= */
 
-// Returns a score from 0 (empty) to 4 (strong) and a label.
 function getPasswordStrength(password) {
   if (password === "") {
     return { score: 0, label: "" };
@@ -353,19 +285,13 @@ function updateStrengthMeter() {
 passwordInput.addEventListener("input", function () {
   updateStrengthMeter();
 
-  // If the visitor changes the password AFTER filling the confirm box,
-  // the "must match" check needs to run again.
+
   if (touched.has(confirmInput)) {
     validateField(fields[5]);    // fields[5] is the confirm-password entry
   }
 });
 
 
-/* =============================================================
-   7. INTERACTIVE UI: SHOW / HIDE PASSWORD
-   The buttons start with the `hidden` attribute in the HTML because they
-   do nothing without JavaScript. Once this script runs, we reveal them.
-   ============================================================= */
 
 const toggleButtons = document.querySelectorAll(".toggle-password");
 
@@ -385,20 +311,12 @@ for (const button of toggleButtons) {
 }
 
 
-/* =============================================================
-   8. INTERACTIVE UI: SHOW / HIDE TOGGLE (the worked example from the slides)
-   1. Select the button and the content to reveal
-   2. Listen for a click event on the button
-   3. In the handler, flip the content's display between "none" and "block"
-   ============================================================= */
+
 
 const infoToggle = document.getElementById("info-toggle");
 const infoPanel  = document.getElementById("info-panel");
 
-// GOTCHA: if the panel were hidden by CSS instead, panel.style.display would
-// read as "" (empty) on the first click and the toggle would misbehave.
-// So we start it hidden from JavaScript, which also means it stays visible
-// for anyone without JavaScript.
+
 infoPanel.style.display = "none";
 infoToggle.hidden = false;
 

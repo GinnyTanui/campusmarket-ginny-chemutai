@@ -1,43 +1,8 @@
-/* =============================================================
-   CampusMarket | js/catalog.js
-   WEEK 2: filtering and calculations (client-side scripting)
-   WEEK 3: uses addEventListener and checks quantities against stock
 
-   Everything here runs inside the visitor's own browser, after the
-   page has loaded. Nothing is sent to a server. That is what
-   "client-side" means, and why the page feels instant.
-
-   Two features:
-     A. FILTER: typing or choosing a value shows or hides product cards.
-     B. CALCULATE: quantity x price for every product, plus a running
-        subtotal, VAT and total.
-
-   Steps from the Week 2 slides, matched to the code below:
-     1. Select the product list and the filter input from the DOM
-     2. Write a function that loops through every product
-     3. Inside the loop, use if / else to decide whether each product matches
-     4. Show matching products, hide the rest, using DOM manipulation
-     5. Write a second function that calculates a running total
-   ============================================================= */
-
-
-/* ---------- 1. VARIABLES ----------
-   const = a value that never changes. Prefer const by default.
-   let   = a value that WILL change later (we use it for running totals). */
-
-// Kenya's standard VAT rate is 16%. Stored once so it is easy to change.
 const TAX_RATE = 0.16;
 
 
-/* ---------- 2. SELECT ELEMENTS FROM THE DOM ----------
-   The DOM is the browser's live, in-memory tree of the page. Before we can
-   change anything, we have to FIND it.
-     getElementById       finds ONE element by its unique id
-     querySelectorAll     finds EVERY element matching a CSS selector
-                          (returns a list we can loop through)
-   Every id used here must exist in catalog.html, spelled exactly the same. */
 
-// Filter controls
 const searchInput    = document.getElementById("search-input");
 const categorySelect = document.getElementById("category-select");
 const priceSelect    = document.getElementById("price-select");
@@ -151,19 +116,12 @@ function clearFilters() {
 }
 
 
-/* =============================================================
-   FEATURE B: CALCULATIONS
-   ============================================================= */
 
-// The core sum from the slides: price x quantity.
 function calculateLineTotal(price, qty) {
   return price * qty;
 }
 
-// WEEK 3 TOUCH: a custom validation rule ("a quantity must be less than
-// what's in stock"). HTML's min/max attributes do not stop someone TYPING
-// 50, so JavaScript checks it too.
-// Returns a safe whole number, and shows a message next to the box if needed.
+
 function getValidQuantity(input, card) {
   const stock = Number(input.dataset.stock);
   const message = card.querySelector(".qty-message");
@@ -193,8 +151,7 @@ function getValidQuantity(input, card) {
   return qty;
 }
 
-// Recalculates every line total and the running order total.
-// Called every time any quantity box changes.
+
 function calculateTotal() {
   let subtotal = 0;    // running totals start at 0 and grow inside the loop
   let itemCount = 0;
@@ -236,23 +193,7 @@ function clearOrder() {
 }
 
 
-/* =============================================================
-   CONNECT EVENTS TO FUNCTIONS
-   An event is something that happens in the browser (a click, a key press,
-   a change). addEventListener says: "when THIS event happens on THIS
-   element, run THAT function."
 
-   Week 2's slide used onclick="..." inside the HTML. addEventListener
-   (Week 3) is the professional way: it keeps JavaScript out of the HTML,
-   and one element can listen for many events. We use it from the start.
-
-   Common events:
-     "input"   fires on every keystroke or change (instant feedback)
-     "change"  fires when a select/dropdown value is chosen
-     "click"   fires when a button is clicked
-   Notice we pass the function NAME (filterProducts), without (), so it
-   runs later when the event happens, not right now.
-   ============================================================= */
 
 searchInput.addEventListener("input", filterProducts);
 categorySelect.addEventListener("change", filterProducts);
@@ -286,8 +227,6 @@ if (categoryFromLink !== null) {
 }
 
 
-/* ---------- RUN ONCE WHEN THE PAGE LOADS ----------
-   Draws the correct starting state. It also fixes the case where a browser
-   remembers old form values after a refresh. */
+/
 filterProducts();
 calculateTotal();

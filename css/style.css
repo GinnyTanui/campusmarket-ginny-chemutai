@@ -1,24 +1,4 @@
-/* =========================================================
-   CampusMarket | css/style.css
-   One stylesheet shared by every page.
 
-   Sections
-   1.  Design tokens (colours, fonts) : change the look here
-   2.  Base styles
-   3.  Layout helpers
-   4.  Header and footer
-   5.  Buttons
-   6.  Price tag
-   7.  Home page                       (Week 1)
-   8.  Catalog page                    (Week 1 + Week 2)
-   9.  Register form                   (Week 3)
-   10. Motion and small screens
-   ========================================================= */
-
-
-/* ---------- 1. DESIGN TOKENS ----------
-   CSS variables (custom properties) let us name a value once
-   and reuse it everywhere with var(--name). */
 :root {
   --paper: #f4f7f2;        /* page background: a cool, slightly green white */
   --card: #ffffff;         /* cards and panels */

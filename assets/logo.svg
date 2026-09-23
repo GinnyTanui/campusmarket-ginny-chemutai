@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60" fill="none">
+  <rect x="4" y="6" width="48" height="48" rx="12" fill="#6D28D9"/>
+  <path d="M18 24C18 20.6863 20.6863 18 24 18H32C35.3137 18 38 20.6863 38 24V40C38 43.3137 35.3137 46 32 46H24C20.6863 46 18 43.3137 18 40V24Z" fill="white" fill-opacity="0.15"/>
+  <path d="M22 22V20C22 16.6863 24.6863 14 28 14C31.3137 14 34 16.6863 34 20V22" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="17" y="22" width="22" height="22" rx="4" fill="white"/>
+  <path d="M24 28L28 32L32 28" stroke="#6D28D9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="28" cy="29" r="1.5" fill="#6D28D9"/>
+  <text x="64" y="32" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="20" font-weight="800" fill="#0F172A" letter-spacing="-0.5">Campus<tspan fill="#6D28D9">Market</tspan></text>
+  <text x="65" y="44" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="9.5" font-weight="600" fill="#64748B" letter-spacing="0.2">STUDENT MARKETPLACE</text>
+</svg>

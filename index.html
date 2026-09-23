@@ -1,134 +1,159 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CampusMarket | Second-hand essentials from students on your campus</title>
-  <meta name="description" content="Buy textbooks, electronics, stationery and room essentials from students on your campus.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusMarket — Buy. Sell. Save on campus.</title>
+<meta name="description" content="CampusMarket is a student marketplace where you can buy and sell textbooks, electronics, fashion and hostel essentials with verified students on your campus.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="js/tailwind-config.js"></script>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen antialiased" data-page="home">
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">CampusMarket</a>
-      <nav class="main-nav" aria-label="Main">
-        <ul>
-          <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="catalog.html">Catalog</a></li>
-          <li><a href="register.html">Register</a></li>
-        </ul>
+<!-- ===================== HEADER ===================== -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+  <div class="max-w-6xl mx-auto px-4 flex flex-col gap-2 py-2">
+    <div class="flex items-center justify-between gap-3">
+      <a href="index.html" class="shrink-0">
+        <img src="assets/logo.svg" alt="CampusMarket logo" class="h-9 w-auto">
+      </a>
+      <nav class="hidden md:flex items-center gap-6 font-label-md text-label-md text-on-surface-variant">
+        <a href="index.html" class="hover:text-primary-container">Home</a>
+        <a href="marketplace.html" class="hover:text-primary-container">Marketplace</a>
+        <a href="register.html" class="hover:text-primary-container">Sell an Item</a>
       </nav>
+      <div class="flex items-center gap-2">
+        <a href="cart.html" class="relative w-11 h-11 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+          <span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+          <span data-cart-badge class="absolute top-1.5 right-1.5 min-w-[18px] h-[18px] bg-primary-container text-on-primary font-label-sm text-[10px] leading-none rounded-full flex items-center justify-center font-bold px-1">0</span>
+        </a>
+        <a href="register.html" class="hidden sm:inline-flex items-center px-4 py-2 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md">Create Account</a>
+      </div>
     </div>
-  </header>
+    <form data-search-form class="flex items-center gap-2">
+      <div class="flex-1 flex items-center bg-surface-container-low rounded-xl px-3 h-11">
+        <span class="material-symbols-outlined text-on-surface-variant text-[20px] mr-2">search</span>
+        <input type="search" placeholder="Search electronics, textbooks, sneakers..." class="w-full bg-transparent border-none outline-none font-body-sm text-body-sm h-full">
+      </div>
+      <button type="submit" class="h-11 px-4 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shrink-0">Search</button>
+    </form>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <h1>Second-hand essentials, from students on your campus.</h1>
-          <p class="lead">
-            CampusMarket is where you find the textbook someone just finished with,
-            a fan for a hot hostel room, or a calculator for tomorrow's CAT.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="catalog.html">Browse the catalog</a>
-            <a class="btn btn-secondary" href="register.html">Create an account</a>
+<main class="flex-1 w-full">
+  <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-10">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="relative w-full rounded-2xl overflow-hidden shadow-md bg-surface-container-lowest">
+      <div class="relative w-full min-h-[280px] flex flex-col justify-end p-6 md:p-10 overflow-hidden">
+        <img alt="Students on campus" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxgkESZZTaaH_fEjqo5xj63jeaZUcggKcJ0FgHPbTodbwrzW64EOEAPlf78mbF1jkKG27_KtqjfRs8x8ztn-ereK_yChGbcRJaUVPGxeBrgFQcluE5hOAWsLFKLHolNrjyDKk6rEAOLQXW1lM2pRgg0gktu-qyxuFe1Nv8LMGcgfr1auKyqgObMbP0EtrJn0O4osCvotsvVhdKhp5NsJeZpVP5Jv7aRw5HE7xKbPsQXqfH_yJm9nhu">
+        <div class="absolute inset-0 bg-gradient-to-t from-on-background via-on-background/70 to-transparent"></div>
+        <div class="relative z-10 flex flex-col gap-2 text-on-primary max-w-lg">
+          <span class="inline-flex items-center gap-1.5 self-start px-2.5 py-0.5 rounded-full bg-tertiary text-on-tertiary-container">
+            <span class="material-symbols-outlined text-[14px]">school</span>
+            <span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Semester Handovers</span>
+          </span>
+          <h1 class="font-headline-lg text-headline-lg font-extrabold leading-tight tracking-tight mt-1">Find What You Need. Sell What You Don't.</h1>
+          <p class="font-body-md text-body-md text-surface-container-high/90">Discover affordable electronics, textbooks &amp; fashion from verified students on your campus.</p>
+          <div class="flex items-center gap-3 pt-2">
+            <a href="marketplace.html" class="inline-flex items-center gap-1 bg-primary-container text-on-primary px-4 py-2.5 rounded-lg font-label-md text-label-md shadow-md">
+              Shop Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+            <a href="register.html" class="inline-flex items-center gap-1 bg-surface-container-lowest/90 backdrop-blur-md text-on-surface px-4 py-2.5 rounded-lg font-label-md text-label-md shadow-sm">
+              <span class="material-symbols-outlined text-[18px] text-primary-container">sell</span> Sell Item
+            </a>
           </div>
         </div>
-
-        <!-- A small "notice board" of items. Static for now: these are typed by hand.
-             From Week 9 this list would come from a database instead. -->
-        <aside class="hero-board" aria-labelledby="board-title">
-          <h2 id="board-title">Fresh on the board</h2>
-          <ul class="board-list">
-            <li>
-              <a class="board-item" href="catalog.html">Calculus: Early Transcendentals</a>
-              <span class="price-tag">KES 1,800</span>
-            </li>
-            <li>
-              <a class="board-item" href="catalog.html">Desk Fan</a>
-              <span class="price-tag">KES 1,200</span>
-            </li>
-            <li>
-              <a class="board-item" href="catalog.html">Gel Pens (box of 12)</a>
-              <span class="price-tag">KES 300</span>
-            </li>
-          </ul>
-        </aside>
+      </div>
+      <div class="bg-surface-container-low px-4 py-2.5 flex items-center justify-center gap-4 flex-wrap">
+        <span class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-tertiary-container">lock</span>Campus Escrow</span>
+        <span class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>Same-Day Handover</span>
+        <span class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>Verified Student IDs</span>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="categories-title">
-      <div class="container">
-        <h2 id="categories-title">Shop by category</h2>
-
-        <ul class="category-grid">
-          <li>
-            <a class="category-link" href="catalog.html?category=Textbooks">
-              <span class="category-icon" aria-hidden="true">📘</span>
-              <span class="category-name">Textbooks</span>
-              <span class="category-count">2 items</span>
-            </a>
-          </li>
-          <li>
-            <a class="category-link" href="catalog.html?category=Electronics">
-              <span class="category-icon" aria-hidden="true">🔌</span>
-              <span class="category-name">Electronics</span>
-              <span class="category-count">3 items</span>
-            </a>
-          </li>
-          <li>
-            <a class="category-link" href="catalog.html?category=Stationery">
-              <span class="category-icon" aria-hidden="true">📓</span>
-              <span class="category-name">Stationery</span>
-              <span class="category-count">2 items</span>
-            </a>
-          </li>
-          <li>
-            <a class="category-link" href="catalog.html?category=Room%20Essentials">
-              <span class="category-icon" aria-hidden="true">💡</span>
-              <span class="category-name">Room Essentials</span>
-              <span class="category-count">2 items</span>
-            </a>
-          </li>
-        </ul>
+    <!-- ===================== CATEGORIES ===================== -->
+    <section class="flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-headline-sm text-headline-sm">Shop by Category</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Hand-picked gear across your faculties</p>
+        </div>
+        <a href="marketplace.html" class="font-label-md text-label-md text-primary-container flex items-center gap-0.5 hover:underline">See all <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+      </div>
+      <div class="flex items-stretch gap-3 overflow-x-auto no-scrollbar py-1">
+        <button data-category-card="electronics" class="flex flex-col justify-between w-32 p-3 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md shrink-0 transition-all text-left">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container"><span class="material-symbols-outlined text-[24px]">laptop_mac</span></div>
+          <div class="mt-3"><span class="font-label-md text-label-md block">Electronics</span></div>
+        </button>
+        <button data-category-card="fashion" class="flex flex-col justify-between w-32 p-3 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md shrink-0 transition-all text-left">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-tertiary-container"><span class="material-symbols-outlined text-[24px]">apparel</span></div>
+          <div class="mt-3"><span class="font-label-md text-label-md block">Fashion</span></div>
+        </button>
+        <button data-category-card="books" class="flex flex-col justify-between w-32 p-3 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md shrink-0 transition-all text-left">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[24px]">menu_book</span></div>
+          <div class="mt-3"><span class="font-label-md text-label-md block">Books &amp; Study</span></div>
+        </button>
+        <button data-category-card="stationery" class="flex flex-col justify-between w-32 p-3 bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md shrink-0 transition-all text-left">
+          <div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary"><span class="material-symbols-outlined text-[24px]">edit_note</span></div>
+          <div class="mt-3"><span class="font-label-md text-label-md block">Stationery</span></div>
+        </button>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="how-title">
-      <div class="container">
-        <h2 id="how-title">How it works</h2>
-        <!-- <ol> (ordered list) because these steps really do happen in order -->
-        <ol class="steps">
-          <li>
-            <strong>Browse the catalog</strong>
-            Every item shows its price in Kenyan shillings and how many are in stock.
-          </li>
-          <li>
-            <strong>Filter and total your order</strong>
-            Search by name, narrow by category or price, then set quantities to see your total.
-          </li>
-          <li>
-            <strong>Create your account</strong>
-            Register once to buy and sell with other students.
-          </li>
-        </ol>
+    <!-- ===================== FEATURED PRODUCTS (rendered by JS) ===================== -->
+    <section class="flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="font-headline-sm text-headline-sm">Trending on Campus</h2>
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Verified student listings active right now</p>
+        </div>
+        <a href="marketplace.html" class="font-label-md text-label-md text-primary-container flex items-center gap-0.5 hover:underline">Browse all <span class="material-symbols-outlined text-[16px]">chevron_right</span></a>
+      </div>
+      <div data-featured-grid class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- ===================== SELLER CTA ===================== -->
+    <section class="bg-surface-container-low rounded-2xl p-6 shadow-sm flex flex-col gap-3">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[18px]">campaign</span></div>
+        <div>
+          <span class="font-label-sm text-label-sm font-bold uppercase tracking-wider text-primary-container">Peer Seller Program</span>
+          <h3 class="font-headline-sm text-headline-sm">Got something to sell?</h3>
+        </div>
+      </div>
+      <p class="font-body-md text-body-md text-on-surface-variant">Turn your unused books, calculators &amp; dorm gear into cash in minutes. Free listing for students with a verified account.</p>
+      <div class="flex items-center gap-3 pt-1">
+        <a href="register.html" class="flex-1 sm:flex-none text-center bg-primary-container text-on-primary py-2.5 px-5 rounded-lg font-label-md text-label-md font-semibold shadow-md">Create Account to Sell</a>
       </div>
     </section>
-  </main>
+  </div>
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>CampusMarket is a course project for CCS 2314 Web Based Programming II. All prices are in Kenyan shillings (KES).</p>
-    </div>
-  </footer>
+<!-- ===================== FOOTER ===================== -->
+<footer class="bg-surface-container-low mt-6">
+  <div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+    <img src="assets/logo.svg" alt="CampusMarket logo" class="h-8 w-auto">
+    <nav class="flex items-center gap-5 font-label-md text-label-md text-on-surface-variant">
+      <a href="index.html" class="hover:text-on-surface">Home</a>
+      <a href="marketplace.html" class="hover:text-on-surface">Marketplace</a>
+      <a href="register.html" class="hover:text-on-surface">Create Account</a>
+      <a href="cart.html" class="hover:text-on-surface">Cart</a>
+    </nav>
+    <span class="font-body-sm text-body-sm text-outline">© 2026 CampusMarket · CCS 2314 Project</span>
+  </div>
+</footer>
 
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>
